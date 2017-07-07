@@ -11,6 +11,10 @@ $RECYCLE.BIN/
 # pycharm stuff
 .idea
 
+# testing stuff
+htmlcov*
+.coverage
+
 # cache files
 __pycache__
 

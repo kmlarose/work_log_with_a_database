@@ -1,4 +1,6 @@
+from collections import OrderedDict
 import datetime
+import os
 
 from peewee import *
 
@@ -23,12 +25,25 @@ def initialize():
     db.create_tables([Entry], safe=True)
 
 
+def clear_console():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
 def menu_loop():
     """Show the menu"""
-    menu_choice = None
+    choice = None
 
-    while menu_choice != 'q':
-        menu_choice = input('Enter q to quit: ').lower()
+    while choice != 'Q':
+        clear_console()
+        print('Work Log')
+        print('='*8)
+        for key, value in menu.items():
+            print('[{}] {}'.format(key, value.__doc__))
+        choice = input('> ').upper()
+
+        if choice in menu:
+            menu[choice]()
+
 
 # As a user of the script, I should be able to choose whether to add a new entry or lookup previous entries.
 # As a user of the script, if I choose to enter a new work log, I should be able to provide my name, a task name,
@@ -59,6 +74,26 @@ def menu_loop():
 # If you’re shooting for the "Exceeds Expectations" grade, it is recommended that you mention so in your submission notes.
 # Passing grades are final. If you try for the "Exceeds Expectations" grade, but miss an item and receive a “Meets Expectations” grade, you won’t get a second chance. Exceptions can be made for items that have been misgraded in review.
 
+
+def add_entry():
+    """Add new entry"""
+    pass
+
+
+def search_entries():
+    """Search entries"""
+    pass
+
+
+def quit_work_log():
+    """Quit Work Log"""
+    pass
+
+menu = OrderedDict([
+    ('A', add_entry),
+    ('S', search_entries),
+    ('Q', quit_work_log)
+])
 
 if __name__ == '__main__':
     initialize()
